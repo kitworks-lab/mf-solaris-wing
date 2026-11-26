@@ -28,3 +28,9 @@ const dossier = buildDossier(out, {
   game_path_max_bytes: 1000,
 });
 writeFileSync(join(out, 'dossier.json'), dossier);
+if (!existsSync(join(out, 'dossier.json'))) {
+  throw new Error('SOLARIS WING: dossier.json was not written to ' + join(out, 'dossier.json'));
+}
+if ((await import('node:fs')).statSync(join(out, 'dossier.json')).size === 0) {
+  throw new Error('SOLARIS WING: dossier.json is zero bytes at ' + join(out, 'dossier.json'));
+}
