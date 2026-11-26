@@ -1,0 +1,6 @@
+[
+  { "name": "1-chase-flight.jpg", "query": "?shot=cover&seed=1" },
+  { "name": "2-cockpit-approach.jpg", "query": "?shot=cockpit&seed=1" },
+  { "name": "3-canyon-mission.jpg", "query": "?shot=canyon&seed=1" },
+  { "name": "4-touchdown-debrief.jpg", "query": "?shot=debrief&seed=1" }
+]
