@@ -1,3 +1,7 @@
+// SOLARIS WING hands in a deterministic dossier: game/ and screenshots/ are copied fresh into the output
+// directory on every run, so the same inputs always produce the same dossier.json bytes.
+// The game is entered through game/index.html, which must exist before buildDossier reads the output tree.
+import { existsSync } from 'node:fs';
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +14,10 @@ for (const dir of ['game', 'screenshots']) {
   rmSync(join(out, dir), { recursive: true, force: true });
   mkdirSync(join(out, dir), { recursive: true });
   cpSync(join(here, dir), join(out, dir), { recursive: true });
+}
+
+if (!existsSync(join(out, 'game', 'index.html'))) {
+  throw new Error('SOLARIS WING: missing game/index.html under ' + join(out, 'game') + '; the game entry point is required before building dossier.json');
 }
 
 const dossier = buildDossier(out, {
